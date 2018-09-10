@@ -36,6 +36,72 @@ class CaptchaTest extends TestCase
         $captcha->code(5);
         $captcha->image();
 
-        $this->assertEquals('', $captcha->getImage());
+        $this->assertNotEmpty($captcha->getImage());    
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_generate_captcha_image_base_on_the_generated_code_with_config_restriction()
+    {
+        $captcha = new Captcha(array(
+            'angle_min' => -1,
+            'angle_max' => 11,
+            'font_size' => 9
+        ));
+        $captcha->code(5);
+        $captcha->image();
+
+        $this->assertNotEmpty($captcha->getImage());
+
+        $captcha->init(array(
+            'angle_min' => 11,
+            'angle_max' => -1,
+        ));
+        $captcha->code(5);
+        $captcha->image();
+
+        $this->assertNotEmpty($captcha->getImage());
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_store_the_code_in_flash_session()
+    {
+        $captcha = new Captcha();
+        $captcha->code(5);
+        $captcha->image();
+        $captcha->storeSession();
+
+        $this->assertTrue(isset($_SESSION['PHP_SIMPLE_CAPTCHA']));
+
+        session_write_close();
+    }
+
+    /**
+     * @test
+     * @depends it_should_store_the_code_in_flash_session
+     */
+    public function it_should_get_the_code_in_flash_session()
+    {
+        $captcha = new Captcha();
+
+        $captchaStoredData = $captcha->getSession();
+
+        $this->assertTrue(isset($captchaStoredData['code']));
+    }
+
+    /**
+     * @test
+     * @depends it_should_get_the_code_in_flash_session
+     */
+    public function it_should_get_the_null_value_in_flash_session()
+    {
+        $captcha = new Captcha();
+
+        $captchaStoredData = $captcha->getSession();
+
+        $this->assertTrue(! isset($captchaStoredData['code']));
     }
 }

@@ -15,6 +15,7 @@
     stopOnFailure="false"
     syntaxCheck="true"
     verbose="true"
+    stderr="true"
 >
     <php>
         <ini name="error_reporting" value="E_ALL" />

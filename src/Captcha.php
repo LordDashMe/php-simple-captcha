@@ -11,8 +11,10 @@
 
 namespace LordDashMe\SimpleCaptcha;
 
+use LordDashMe\SimpleCaptcha\Utility\HexToRGB;
+
 /**
- * Captcha Facade Class.
+ * Captcha Class.
  * 
  * A php simple captcha implementation that suite to any type of system built on php.
  * 
@@ -20,6 +22,44 @@ namespace LordDashMe\SimpleCaptcha;
  */
 class Captcha
 {
+    const SESSION_NAME = 'php-simple-captcha-session';
+
+    /**
+     * The default config for the captcha.
+     * 
+     * @return array
+     */
+    protected $config = array(
+        'session_name' => 'php-simple-captcha',
+        'session_index_name' => 'PHP_SIMPLE_CAPTCHA',
+        'session_https' => false,
+        'session_http_only' => true,
+
+        'backgrounds' => array(
+            '45-degree-fabric.png',
+            'cloth-alike.png',
+            'grey-sandbag.png',
+            'kinda-jean.png',
+            'polyester-lite.png',
+            'stitched-wool.png',
+            'white-carbon.png',
+            'white-wave.png'
+        ),
+
+        'fonts' => array(
+            'times_new_yorker.ttf'
+        ),
+
+        'font_size' => 28,
+        'color' => '#555',
+        'angle_min' => 0,
+        'angle_max' => 10,
+        'shadow' => true,
+        'shadow_color' => '#fff',
+        'shadow_offset_x' => -1,
+        'shadow_offset_y' => 1
+    );
+
     /**
      * The captcha generated unique code.
      * 
@@ -34,7 +74,57 @@ class Captcha
      */
     protected $image = '';
 
-    public function __construct() {}
+    /**
+     * The class constructor.
+     * 
+     * @param  array  $config    To override the default config of the captcha.
+     * 
+     * @return void
+     */
+    public function __construct($config = array()) 
+    {
+        $this->init($config);
+    }
+
+    /**
+     * The sub method for the class constructor.
+     * 
+     * @param  array  $config   To override the default config of the captcha.
+     * 
+     * @return void
+     */
+    public function init($config = array())
+    {
+        $this->config = \array_merge($this->config, $this->configRestriction($config));
+    }
+
+    /**
+     * The configuration restriction, this will reset the inputed config into
+     * default values to avoid any conflicts in the process later on.
+     * 
+     * @param  array  $config    The unfiltered inputed config.
+     * 
+     * @return array
+     */
+    protected function configRestriction($config)
+    {
+        if(isset($config['angle_min']) && $config['angle_min'] < 0) {
+            $config['angle_min'] = 0;
+        }
+        if(isset($config['angle_max']) && $config['angle_max'] > 10) {
+            $config['angle_max'] = 10;
+        }
+        if((isset($config['angle_max']) && isset($config['angle_min'])) && 
+            $config['angle_max'] < $config['angle_min']
+        ) {
+            $config['angle_max'] = $config['angle_min'];
+        }
+        if(isset($config['font_size']) && $config['font_size'] < 10) {
+            $config['font_size'] = 10;
+        }
+
+        return $config;
+    }
 
     /**
      * The getter method for the code property class.
@@ -51,7 +141,7 @@ class Captcha
      * on the given length. The code generated will be pass to the
      * code property that will be use to print an image of captcha code.
      * 
-     * @param  int  $length  The given length for the captcha code.
+     * @param  int  $length    The given length for the captcha code.
      * 
      * @return $this
      */
@@ -66,20 +156,20 @@ class Captcha
      * Generate unique code base on the given length and
      * the allowed code characters.
      * 
-     * @param  int  $length   The code max length to be generate.
+     * @param  int  $length    The code max length to be generate.
      * 
      * @return string
      */
     protected function generateUniqueCode($length)
     {
         $characters = $this->allowedCodeCharacters();
-        $charactersLength = (strlen($characters) - 1);
+        $charactersLength = (\strlen($characters) - 1);
         
         $code = '';
         
         for ($i = 0; $i < $length; $i++) {
-            $number = rand(0, $charactersLength);
-            $jumbleNumber = rand(0, $number);
+            $number = \rand(0, $charactersLength);
+            $jumbleNumber = \rand(0, $number);
             $code .= $characters[$jumbleNumber];
         }
         
@@ -104,7 +194,205 @@ class Captcha
      */
     public function image()
     {
+        $this->image = $this->generateBase64Image();
+    }
 
+    /**
+     * Generate base 64 code of the builded catpcha image.
+     * 
+     * @return string
+     */
+    protected function generateBase64Image()
+    {
+        $background = $this->backgrounds();
+        $backgroundSize = $this->backgroundSize($background);
+        
+        $imageCanvas = $this->imageCanvas($background);
+        
+        $color = $this->color($imageCanvas);
+        $textAngle = $this->textAngle();
+        $font = $this->fonts();
+        $fontSize = $this->fontSize();
+        $textBoxSize = $this->textBoxSize($textAngle, $font, $fontSize, $this->getCode());
+        $textPosition = $this->textPosition($textBoxSize, $backgroundSize);
+
+        $imageCanvas = $this->drawShadow(
+            $imageCanvas, $textAngle, $font, $fontSize, $textPosition, $this->getCode()
+        );
+
+        $imageCanvas = $this->drawText(
+            $imageCanvas, $textAngle, $font, $fontSize, $textPosition, $color, $this->getCode()
+        );
+        
+        $image = $this->imageExportContents($imageCanvas);
+
+        unset($imageCanvas);
+
+        $imageBase64Data = "data:image/png;base64,";
+        $imageBase64Data .= \base64_encode($image);
+
+        unset($image);
+
+        return $imageBase64Data;
+    }
+
+    protected function backgrounds()
+    {
+        $index = \mt_rand(0, \count($this->config['backgrounds']) -1);
+
+        return $this->backgroundsDirectoryPath() . 
+               $this->config['backgrounds'][$index];
+    }
+
+    protected function backgroundSize($background)
+    {
+        list($bgWidth, $bgHeight, $bgType, $bgAttr) = \getimagesize($background);
+
+        return array(
+            'bg_width' => $bgWidth,
+            'bg_height' => $bgHeight,
+            'bg_type' => $bgType,
+            'bg_attr' => $bgAttr
+        );
+    }
+
+    protected function imageCanvas($background)
+    {
+        return \imagecreatefrompng($background);
+    }
+
+    protected function color($imageCanvas)
+    {
+        $rgb = $this->convertHexToRGB($this->config['color']);
+
+        return imagecolorallocate($imageCanvas, $rgb['r'], $rgb['g'], $rgb['b']);
+    }
+
+    protected function textAngle()
+    {
+        $textAngleRandom = \mt_rand(
+            $this->config['angle_min'], $this->config['angle_max']
+        );
+
+        return $textAngleRandom * (\mt_rand(0, 1) == 1 ? -1 : 1);
+    }
+
+    protected function fonts()
+    {
+        return $this->fontsDirectoryPath() . 
+               $this->config['fonts'][\mt_rand(0, \count($this->config['fonts']) - 1)];
+    }
+
+    protected function fontSize()
+    {
+        return $this->config['font_size'];
+    }
+
+    protected function textBoxSize($textAngle, $font, $fontSize, $code)
+    {
+        return \imagettfbbox($fontSize, $textAngle, $font, $code);   
+    }
+
+    protected function textPosition($textBoxSize, $backgroundSize)
+    {
+        $boxWidth = \abs($textBoxSize[6] - $textBoxSize[2]);
+        $boxHeight = \abs($textBoxSize[5] - $textBoxSize[1]);
+
+        $textPositionXMin = 0;
+        $textPositionXMax = ($backgroundSize['bg_width']) - ($boxWidth);
+
+        $textPositionX = \mt_rand($textPositionXMin, $textPositionXMax);
+
+        $textPositionYMin = $boxHeight;
+        $textPositionYMax = ($backgroundSize['bg_height']) - ($boxHeight / 2);
+
+        if ($textPositionYMin > $textPositionYMax) {
+            $temp_textPositionY = $textPositionYMin;
+            $textPositionYMin = $textPositionYMax;
+            $textPositionYMax = $temp_textPositionY;
+        }
+
+        $textPositionY = \mt_rand($textPositionYMin, $textPositionYMax);
+
+        return array(
+            'text_position_x' => $textPositionX,
+            'text_position_y' => $textPositionY
+        );
+    }
+
+    protected function drawShadow($imageCanvas, $textAngle, $font, $fontSize, $textPosition, $code)
+    {
+        if ($this->config['shadow']) {
+            
+            $shadowColor = $this->convertHexToRGB($this->config['shadow_color']);
+            
+            $shadowColor = \imagecolorallocate(
+                $imageCanvas, 
+                $shadowColor['r'], $shadowColor['g'], $shadowColor['b']
+            );
+            
+            \imagettftext(
+                $imageCanvas, 
+                $fontSize, 
+                $textAngle, 
+                $textPosition['text_position_x'] + $this->config['shadow_offset_x'], 
+                $textPosition['text_position_y'] + $this->config['shadow_offset_y'], 
+                $shadowColor, 
+                $font, 
+                $code
+            );
+        }
+
+        return $imageCanvas;
+    }
+
+    protected function drawText($imageCanvas, $textAngle, $font, $fontSize, $textPosition, $color, $code)
+    {
+        \imagettftext(
+            $imageCanvas, 
+            $fontSize, 
+            $textAngle, 
+            $textPosition['text_position_x'], 
+            $textPosition['text_position_y'], 
+            $color, 
+            $font, 
+            $code
+        );
+
+        return $imageCanvas;
+    }
+
+    protected function convertHexToRGB($hexString)
+    {
+        return HexToRGB::convert($hexString);
+    }
+
+    /**
+     * The export functions for the image depending on the selected
+     * image type.
+     * 
+     * @param  mixed   $image         The generated image content.
+     *
+     * @return string 
+     */
+    protected function imageExportContents($image)
+    {
+        \ob_start();
+
+        \header("Content-Type: image/png");
+        \imagepng($image);
+
+        return \ob_get_clean();
+    }
+
+    protected function backgroundsDirectoryPath()
+    {
+        return dirname(__FILE__) . '/../resources/backgrounds/';
+    }
+
+    protected function fontsDirectoryPath()
+    {
+        return dirname(__FILE__) . '/../resources/fonts/';
     }
 
     /**
@@ -114,6 +402,47 @@ class Captcha
      */
     public function getImage()
     {
+        return $this->image;    
+    }
+
+    public function storeSession()
+    {
+        $this->setSessionCookieSetup();
         
+        $_SESSION[$this->config['session_index_name']] = array(
+            'code' => $this->getCode()
+        );
+    }
+
+    public function getSession()
+    {
+        if (! isset($_COOKIE[$this->config['session_name']])) {
+            $this->setSessionCookieSetup();
+        }
+
+        $data = $this->getSessionStoredData();
+        \session_unset();
+        \session_destroy();
+        unset($_COOKIE[$this->config['session_index_name']]);
+        return $data;
+    }
+
+    protected function setSessionCookieSetup()
+    {
+        $cookie = \session_get_cookie_params();
+        \session_set_cookie_params( $cookie['lifetime'], $cookie['path'], $cookie['domain'], 
+            $this->config['session_https'], $this->config['session_http_only']
+        );
+        \session_name($this->config['session_name']);
+        \session_start(array('gc_maxlifetime' => 860));
+    }
+
+    protected function getSessionStoredData()
+    {
+        if (! isset($_SESSION[$this->config['session_index_name']])) {
+            return null;
+        }
+
+        return $_SESSION[$this->config['session_index_name']];
     }
 }
