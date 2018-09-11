@@ -47,9 +47,9 @@ class CaptchaTest extends TestCase
         $captcha = new Captcha(array(
             'angle_min' => -1,
             'angle_max' => 11,
-            'font_size' => 9
+            'font_size_min' => 9
         ));
-        $captcha->code(5);
+        $captcha->code(4);
         $captcha->image();
 
         $this->assertNotEmpty($captcha->getImage());
@@ -58,6 +58,63 @@ class CaptchaTest extends TestCase
             'angle_min' => 11,
             'angle_max' => -1,
         ));
+        $captcha->code(5);
+        $captcha->image();
+
+        $this->assertNotEmpty($captcha->getImage());
+
+        $captcha->init(array(
+            'font_size_min' => 11,
+            'font_size_max' => -1,
+        ));
+        $captcha->code(5);
+        $captcha->image();
+
+        $this->assertNotEmpty($captcha->getImage());
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_generate_captcha_image_and_with_mocked_textbox_size_when_text_position_xmin_greater_than_xmax()
+    {
+        $captcha = Mockery::mock('LordDashMe\SimpleCaptcha\Captcha[textBoxSize]')
+            ->shouldAllowMockingProtectedMethods();
+        $captcha->shouldReceive('textBoxSize')
+            ->andReturn(array(
+                0 => -5,
+                1 => 13,
+                2 => 228,
+                3 => 13,
+                4 => 228,
+                5 => -34,
+                6 => -5,
+                7 => -34
+            ));
+        $captcha->code(5);
+        $captcha->image();
+
+        $this->assertNotEmpty($captcha->getImage());   
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_generate_captcha_image_and_with_mocked_textbox_size_when_text_position_ymin_greater_than_ymax()
+    {
+        $captcha = Mockery::mock('LordDashMe\SimpleCaptcha\Captcha[textBoxSize]')
+            ->shouldAllowMockingProtectedMethods();
+        $captcha->shouldReceive('textBoxSize')
+            ->andReturn(array(
+                0 => -6,
+                1 => 13,
+                2 => 110,
+                3 => -7,
+                4 => 103,
+                5 => -47,
+                6 => -13,
+                7 => -26
+            ));
         $captcha->code(5);
         $captcha->image();
 
