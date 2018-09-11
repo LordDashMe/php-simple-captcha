@@ -173,7 +173,7 @@ $config = array(
 
 $captcha = new Captcha($config);
 
-// Or in a static like class.
+// Or in a static like class initialization.
 
 Captcha::init($config);
 ``` 
