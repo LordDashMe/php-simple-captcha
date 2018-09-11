@@ -38,7 +38,7 @@ $captcha->image();
 // The generated captcha code, something like "QwErtyx..."
 echo $captcha->getCode(); 
 
-// The generated captcha image that include the code above and the output is base64 url of the image.
+// The generated captcha image that include the code above and the output is base64 url "data:image/png;base64,iVBORw0KGgoAA..."
 echo $captcha->getImage(); 
 ```
 
