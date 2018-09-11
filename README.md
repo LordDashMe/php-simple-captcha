@@ -18,6 +18,12 @@ composer require lorddashme/php-simple-captcha
 
 ## Usage
 
+- Below are the available functions:
+
+| Function | Description |
+| -------- | ----------- |
+| <img width=1000/>  |<img width=200/> |
+
 - The basic usage of the package:
 
 ```php
@@ -63,9 +69,13 @@ echo Captcha::getImage();
 - The package also provided a simple way to validate the user input code, base on the captcha image:
   
   - For example we have a registration page file:
+    
     - Initialize the Captcha class together with the code and image generation function.
+    
     - Use the ```storeSession()``` to save the generated captcha details in the captcha own session.
+    
     - The store session are essential later for validating the user input.
+    
     ```php
     <?php
     
@@ -90,9 +100,13 @@ echo Captcha::getImage();
     </form>
     ```
   - And the validation page file:
+  
     - We need to initialize again the Captcha class but now we don't need to initialize the generation code.
+    
     - Thus the generation code will only be use when we want to show a captcha image.
+    
     - But in this scenario we want to validate the user inputed code only.
+    
     ```php
     <?php 
     
@@ -111,7 +125,7 @@ echo Captcha::getImage();
       return 'Code is invalid!';
     }
     ```
-
+    
 ## License
 
 This package is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
