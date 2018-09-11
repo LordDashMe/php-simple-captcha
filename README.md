@@ -16,6 +16,32 @@ A php simple captcha implementation that suite to any type of system built on ph
 composer require lorddashme/php-simple-captcha
 ```
 
+## Usage
+
+- The basic usage of the package:
+```php
+<?php
+
+include __DIR__  . '/vendor/autoload.php';
+
+use LordDashMe\SimpleCaptcha\Captcha;
+
+// Initialize the captcha class.
+$captcha = new Captcha();
+
+// Execute the random generation of code.
+$captcha->code();
+
+// Execute the image captcha rendering.
+$captcha->image();
+
+// The generated captcha code, something like "QwErtyx..."
+echo $captcha->getCode(); 
+
+// The generated captcha image that include the code above and the output is base64 url of the image.
+echo $captcha->getImage(); 
+```
+
 ## License
 
 This package is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
