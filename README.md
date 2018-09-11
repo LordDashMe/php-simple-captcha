@@ -10,7 +10,7 @@ A php simple captcha implementation that suite to any type of system built on ph
 
 ## Install
 
-- It's advice to install the package via Composer. Use the command below to install the package:
+- It is advice to install the package via Composer. Use the command below to install the package:
 
 ```txt
 composer require lorddashme/php-simple-captcha
