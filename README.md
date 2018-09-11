@@ -59,9 +59,11 @@ echo $captcha->getImage();
     $captcha->code();
     $captcha->image();
     $captcha->storeSession();
+    
     ?>
+    
     <form method="POST" action="/reg-validation-page.php">
-      ...
+      Your other fields here...
       <img src="<?php echo $captcha->getImage(); ?>">
       <input type="text" name="user_captcha_code" value="">
     </form>
