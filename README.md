@@ -43,9 +43,12 @@ echo $captcha->getCode();
 // and the output is base64 data image "data:image/png;base64,iVBORw0KGgoAA..."
 echo $captcha->getImage(); 
 ```
-- The package also provided a simple way to validate the user input code base on the captcha image:
+- The package also provided a simple way to validate the user input code, base on the captcha image:
   
   - For example we have a registration page file:
+    - Initialize the Captcha class together with the code and image generation function.
+    - Use the ```storeSession()``` to save the generated captcha details in the captcha own session.
+    - The store session are essential later for validating the user input.
     ```php
     <?php
     
@@ -66,9 +69,13 @@ echo $captcha->getImage();
       Your other fields here...
       <img src="<?php echo $captcha->getImage(); ?>">
       <input type="text" name="user_captcha_code" value="">
+      <input type="submit" value="Register">
     </form>
     ```
   - And the validation page file:
+    - We need to initialize again the Captcha class but now we don't need to initialize the generation code.
+    - Thus the generation code will only be use when we want to show a captcha image.
+    - But in this scenario we want to validate the user inputed code only.
     ```php
     <?php 
     
