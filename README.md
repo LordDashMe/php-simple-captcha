@@ -81,7 +81,7 @@ echo Captcha::getImage();
         
         - Use the ```storeSession()``` to save the generated captcha details in the captcha own session.
         
-        - The store session are essential later for validating the user input.
+        - The stored session is essential for validating the user input.
     
             ```php
             <?php
