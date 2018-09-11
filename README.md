@@ -47,7 +47,9 @@ echo $captcha->getImage();
   
   - For example we have a registration page file:
     ```php
-    <?php  // registration-page.php
+    <?php
+    
+    // registration-page.php
 
     include __DIR__  . '/vendor/autoload.php';
 
@@ -57,10 +59,19 @@ echo $captcha->getImage();
     $captcha->code();
     $captcha->image();
     $captcha->storeSession();
+    ?>
+    <form method="POST" action="/reg-validation-page.php">
+      ...
+      <img src="<?php echo $captcha->getImage(); ?>">
+      <input type="text" name="user_captcha_code" value="">
+    </form>
     ```
   - And the validation page file:
     ```php
-    <?php // reg-validation-page.php
+    <?php 
+    
+    // reg-validation-page.php
+    
     include __DIR__  . '/vendor/autoload.php';
 
     use LordDashMe\SimpleCaptcha\Captcha;
