@@ -58,6 +58,7 @@ echo $captcha->getImage();
 ```
 
 - Basic usage can also be done by the implementation below:
+
 ```php
 <?php
 
@@ -75,63 +76,66 @@ echo Captcha::getImage();
 
 - The package also provided a simple way to validate the user input code, base on the captcha image:
   
-    - For example we have a registration page file:
-    
-        - Initialize the Captcha class together with the code and image generation function.
-        
-        - Use the ```storeSession()``` to save the generated captcha details in the captcha own session.
-        
-        - The stored session is essential for validating the user input.
-    
-            ```php
-            <?php
-            
-            // registration-page.php
+  - For example we have a registration page file:
 
-            include __DIR__  . '/vendor/autoload.php';
+    - Initialize the Captcha class together with the code and image generation function.
 
-            use LordDashMe\SimpleCaptcha\Captcha;
+    - Use the ```storeSession()``` to save the generated captcha details in the captcha own session.
 
-            $captcha = new Captcha();
-            $captcha->code();
-            $captcha->image();
-            $captcha->storeSession();
-            
-            ?>
-            
-            <form method="POST" action="/reg-validation-page.php">
-                Your other fields here...
-                <img src="<?php echo $captcha->getImage(); ?>">
-                <input type="text" name="user_captcha_code" value="">
-                <input type="submit" value="Register">
-            </form>
-            ```
-    - And the validation page file:
-  
-        - We need to initialize again the Captcha class but now we don't need to initialize the code and image generation.
-        
-        - The generation will only be use when we want to show a new captcha image and code.
-        
-        - But in this scenario we want only to validate the user input captcha code.
-    
-            ```php
-            <?php 
-            
-            // reg-validation-page.php
-            
-            include __DIR__  . '/vendor/autoload.php';
+    - The stored session is essential for validating the user input.
 
-            use LordDashMe\SimpleCaptcha\Captcha;
+        ```php
+        <?php
 
-            $captcha = new Captcha();
-            $data = $captcha->getSession(); // return(s) array( 'code' => 'QwErTyx...' )
-            
-            if ($_POST['user_captcha_code'] === $data['code']) {
-                return 'Code is valid!';
-            } else {
-                return 'Code is invalid!';
-            }
-            ```
+        // registration-page.php
+
+        include __DIR__  . '/vendor/autoload.php';
+
+        use LordDashMe\SimpleCaptcha\Captcha;
+
+        $captcha = new Captcha();
+        $captcha->code();
+        $captcha->image();
+        $captcha->storeSession();
+
+        ?>
+
+        <form method="POST" action="/reg-validation-page.php">
+
+            Your other fields here...
+
+            <img src="<?php echo $captcha->getImage(); ?>">
+            <input type="text" name="user_captcha_code" value="">
+            <input type="submit" value="Register">
+
+        </form>
+        ```
+  - And the validation page file:
+
+    - We need to initialize again the Captcha class but now we don't need to initialize the code and image generation.
+
+    - The generation will only be use when we want to show a new captcha image and code.
+
+    - But in this scenario we want only to validate the user input captcha code.
+
+        ```php
+        <?php
+
+        // reg-validation-page.php
+
+        include __DIR__  . '/vendor/autoload.php';
+
+        use LordDashMe\SimpleCaptcha\Captcha;
+
+        $captcha = new Captcha();
+        $data = $captcha->getSession(); // return(s) array( 'code' => 'QwErTyx...' )
+
+        if ($_POST['user_captcha_code'] === $data['code']) {
+            return 'Code is valid!';
+        } else {
+            return 'Code is invalid!';
+        }
+        ```
 
 - To change the default configuration setup of the Captcha class you can override the below codes:
 
@@ -177,39 +181,39 @@ $captcha = new Captcha($config);
 // Or in a static like class initialization.
 
 Captcha::init($config);
-``` 
+```
 
 - Note in overriding the config of Captcha class.
 
   1. The ```backgrounds``` and ```fonts``` are tightly coupled in the directory of the plugin.
   
   2. If you want to override the ```backgrounds``` and ```fonts``` you need to extends the Captcha class with your New class that overrides the protected methods of Captcha class for resources directory ```backgroundsDirectoryPath()``` and ```fontsDirectoryPath```.
-        
-        ```php
-        <?php
 
-        include __DIR__  . '/vendor/autoload.php';
+    ```php
+    <?php
 
-        use LordDashMe\SimpleCaptcha\Captcha;
+    include __DIR__  . '/vendor/autoload.php';
 
-        class MyNewCaptcha extends Captcha
+    use LordDashMe\SimpleCaptcha\Captcha;
+
+    class MyNewCaptcha extends Captcha
+    {
+        public function __construct($config = array())
         {
-            public function __construct($config = array())
-            {
-                parent::__construct($config);
-            }
-
-            protected function backgroundsDirectoryPath()
-            {
-                return 'path/to/your/custom/backgrounds/';
-            }
-
-            protected function fontsDirectoryPath()
-            {
-                return 'path/to/your/custom/fonts/'; 
-            }
+            parent::__construct($config);
         }
-        ```
+
+        protected function backgroundsDirectoryPath()
+        {
+            return 'path/to/your/custom/backgrounds/';
+        }
+
+        protected function fontsDirectoryPath()
+        {
+            return 'path/to/your/custom/fonts/'; 
+        }
+    }
+    ```
 
 ## License
 
