@@ -108,11 +108,11 @@ echo Captcha::getImage();
             ```
     - And the validation page file:
   
-        - We need to initialize again the Captcha class but now we don't need to initialize the generation code.
+        - We need to initialize again the Captcha class but now we don't need to initialize the code and image generation.
         
-        - Thus the generation code will only be use when we want to show a captcha image.
+        - Thus the generation will only be use when we want to show a new captcha image and code.
         
-        - But in this scenario we want to validate the user inputed code only.
+        - But in this scenario we want only to validate the user input captcha code.
     
             ```php
             <?php 
