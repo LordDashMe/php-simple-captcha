@@ -19,6 +19,7 @@ composer require lorddashme/php-simple-captcha
 ## Usage
 
 - The basic usage of the package:
+
 ```php
 <?php
 
@@ -35,13 +36,44 @@ $captcha->code();
 // Execute the image captcha rendering.
 $captcha->image();
 
-// The generated captcha code, something like "QwErtyx..."
+// The generated captcha code, something like "QwErTyx..."
 echo $captcha->getCode(); 
 
-// The generated captcha image that include the code above  
-// and the output is base64 url "data:image/png;base64,iVBORw0KGgoAA..."
+// The generated captcha image that included the code above  
+// and the output is base64 data image "data:image/png;base64,iVBORw0KGgoAA..."
 echo $captcha->getImage(); 
 ```
+- The package also provided a simple way to validate the user input code base on the captcha image:
+  
+  - For example we have a registration page file:
+    ```php
+    <?php  // registration-page.php
+
+    include __DIR__  . '/vendor/autoload.php';
+
+    use LordDashMe\SimpleCaptcha\Captcha;
+
+    $captcha = new Captcha();
+    $captcha->code();
+    $captcha->image();
+    $captcha->storeSession();
+    ```
+  - And the validation page file:
+    ```php
+    <?php // reg-validation-page.php
+    include __DIR__  . '/vendor/autoload.php';
+
+    use LordDashMe\SimpleCaptcha\Captcha;
+
+    $captcha = new Captcha();
+    $data = $captcha->getSession(); // return(s) array( 'code' => 'QwErTyx...' )
+    
+    if ($_POST['user_captcha_code'] === $data['code']) {
+      return 'Code is valid!';
+    } else {
+      return 'Code is invalid!';
+    }
+    ```
 
 ## License
 
