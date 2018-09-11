@@ -4,6 +4,8 @@ A php simple captcha implementation that suite to any type of system built on ph
 
 [![Latest Stable Version](https://img.shields.io/packagist/v/lorddashme/php-simple-captcha.svg?style=flat-square)](https://packagist.org/packages/lorddashme/php-simple-captcha) [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg?style=flat-square)](https://php.net/) [![Build Status](https://img.shields.io/travis/LordDashMe/php-simple-captcha/master.svg?style=flat-square)](https://travis-ci.org/LordDashMe/php-simple-captcha) [![Coverage Status](https://img.shields.io/coveralls/LordDashMe/php-simple-captcha/master.svg?style=flat-square)](https://coveralls.io/github/LordDashMe/php-simple-captcha?branch=master)
 
+## Sample
+
 ![PHP Simple Captcha](resources/img/simple-captcha-sample.png) ![PHP Simple Captcha 1](resources/img/simple-captcha-sample-1.png) ![PHP Simple Captcha 2](resources/img/simple-captcha-sample-2.png) ![PHP Simple Captcha 3](resources/img/simple-captcha-sample-3.png)
 
 ## Requirement(s)
