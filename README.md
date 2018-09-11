@@ -43,6 +43,23 @@ echo $captcha->getCode();
 // and the output is base64 data image "data:image/png;base64,iVBORw0KGgoAA..."
 echo $captcha->getImage(); 
 ```
+
+- Basic usage can also be done by the implementation below:
+```php
+<?php
+
+include __DIR__  . '/vendor/autoload.php';
+
+use LordDashMe\SimpleCaptcha\Facade\Captcha;
+
+Captcha::init();
+Captcha::code();
+Captcha::image();
+
+echo Captcha::getCode();
+echo Captcha::getImage();
+```
+
 - The package also provided a simple way to validate the user input code, base on the captcha image:
   
   - For example we have a registration page file:
