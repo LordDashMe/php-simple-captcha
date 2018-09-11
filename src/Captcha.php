@@ -30,8 +30,8 @@ class Captcha
      * @return array
      */
     protected $config = array(
-        'session_name'       => 'php-simple-captcha',
-        'session_index_name' => 'PHP_SIMPLE_CAPTCHA',
+        'session_name'       => 'ldm-simple-captcha',
+        'session_index_name' => 'LDM_SIMPLE_CAPTCHA',
         'session_https'      => false,
         'session_http_only'  => true,
         'font_color'         => '#999',

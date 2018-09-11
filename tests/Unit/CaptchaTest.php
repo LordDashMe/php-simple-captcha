@@ -131,7 +131,7 @@ class CaptchaTest extends TestCase
         $captcha->image();
         $captcha->storeSession();
 
-        $this->assertTrue(isset($_SESSION['PHP_SIMPLE_CAPTCHA']));
+        $this->assertTrue(isset($_SESSION['LDM_SIMPLE_CAPTCHA']));
 
         session_write_close();
     }
