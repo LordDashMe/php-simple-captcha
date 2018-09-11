@@ -131,7 +131,92 @@ echo Captcha::getImage();
       return 'Code is invalid!';
     }
     ```
-    
+
+- To change the default configuration setup of the Captcha class you can override the below codes:
+
+```php
+<?php
+
+include __DIR__  . '/vendor/autoload.php';
+
+use LordDashMe\SimpleCaptcha\Captcha;
+
+$config = array(
+    'session_name'       => 'ldm-simple-captcha',
+    'session_index_name' => 'LDM_SIMPLE_CAPTCHA',
+    'session_https'      => false,
+    'session_http_only'  => true,
+    'font_color'         => '#999',
+    'font_size_min'      => 28,
+    'font_size_max'      => 28,
+    'angle_min'          => 0,
+    'angle_max'          => 10,
+    'shadow'             => true,
+    'shadow_color'       => '#fff',
+    'shadow_offset_x'    => -3,
+    'shadow_offset_y'    => 1,
+    'backgrounds' => array(
+        '45-degree-fabric.png',
+        'cloth-alike.png',
+        'grey-sandbag.png',
+        'kinda-jean.png',
+        'polyester-lite.png',
+        'stitched-wool.png',
+        'white-carbon.png',
+        'white-wave.png'
+    ),
+    'fonts' => array(
+        'times_new_yorker.ttf'
+    )
+);
+
+$captcha = new Captcha($config);
+
+// Or in a static like class.
+
+
+use LordDashMe\SimpleCaptcha\Facade\Captcha;
+
+$config = array(
+    'session_name'       => 'ldm-simple-captcha',
+    'session_index_name' => 'LDM_SIMPLE_CAPTCHA',
+    'session_https'      => false,
+    'session_http_only'  => true,
+    'font_color'         => '#999',
+    'font_size_min'      => 28,
+    'font_size_max'      => 28,
+    'angle_min'          => 0,
+    'angle_max'          => 10,
+    'shadow'             => true,
+    'shadow_color'       => '#fff',
+    'shadow_offset_x'    => -3,
+    'shadow_offset_y'    => 1,
+    'backgrounds' => array(
+        '45-degree-fabric.png',
+        'cloth-alike.png',
+        'grey-sandbag.png',
+        'kinda-jean.png',
+        'polyester-lite.png',
+        'stitched-wool.png',
+        'white-carbon.png',
+        'white-wave.png'
+    ),
+    'fonts' => array(
+        'times_new_yorker.ttf'
+    )
+);
+
+Captcha::init($config);
+
+``` 
+
+- Some notes in overriding the config of Captcha class.
+
+  - The ```backgrounds``` and ```fonts``` are tightly coupled in the directory of the plugin.
+  
+  - If you want to override the ```backgrounds``` and ```fonts``` you need to extends the Captcha class with your New class
+  that overrides the protected methods of Captcha class for resources directory ```backgroundsDirectoryPath()``` and ```fontsDirectoryPath```
+
 ## License
 
 This package is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
