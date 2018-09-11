@@ -178,7 +178,7 @@ $captcha = new Captcha($config);
 Captcha::init($config);
 ``` 
 
-- Some notes in overriding the config of Captcha class.
+- Note in overriding the config of Captcha class.
 
   1. The ```backgrounds``` and ```fonts``` are tightly coupled in the directory of the plugin.
   
