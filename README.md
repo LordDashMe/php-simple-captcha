@@ -2,7 +2,7 @@
 
 A php simple captcha implementation that suite to any type of system built on php.
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/LordDashMe/php-simple-captcha.svg?style=flat-square)](https://packagist.org/packages/LordDashMe/php-simple-captcha) [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg?style=flat-square)](https://php.net/) [![Build Status](https://img.shields.io/travis/LordDashMe/php-simple-captcha/master.svg?style=flat-square)](https://travis-ci.org/LordDashMe/php-simple-captcha) [![Coverage Status](https://img.shields.io/coveralls/LordDashMe/php-simple-captcha/master.svg?style=flat-square)](https://coveralls.io/github/LordDashMe/php-simple-captcha?branch=master)
+[![Latest Stable Version](https://img.shields.io/packagist/v/lorddashme/php-simple-captcha.svg?style=flat-square)](https://packagist.org/packages/lorddashme/php-simple-captcha) [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.6-8892BF.svg?style=flat-square)](https://php.net/) [![Build Status](https://img.shields.io/travis/LordDashMe/php-simple-captcha/master.svg?style=flat-square)](https://travis-ci.org/LordDashMe/php-simple-captcha) [![Coverage Status](https://img.shields.io/coveralls/LordDashMe/php-simple-captcha/master.svg?style=flat-square)](https://coveralls.io/github/LordDashMe/php-simple-captcha?branch=master)
 
 ## Requirement(s)
 
@@ -10,13 +10,202 @@ A php simple captcha implementation that suite to any type of system built on ph
 
 ## Install
 
-- It's advice to install the package via Composer. Use the command below to install the package:
+- It is advice to install the package via Composer. Use the command below to install the package:
 
 ```txt
 composer require lorddashme/php-simple-captcha
 ```
 
-<img src="data:image/png;base64,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">
+## Usage
+
+- Below are the available functions:
+
+| Function | Description |
+| -------- | ----------- |
+| <img width=200/>  |<img width=200/> |
+| ```code(length);``` | Execute the generation of random code base on the given length. <br> (Default length is 5) |
+| ```image();``` | Execute the generation of image and the content will be base on the ```code(length);``` method. |
+| ```getCode();``` | To get the current code generated by the ```code(length);``` method. <br> (Example return value ```QwErTyx...```) |
+| ```getImage();``` | To get the current image generated by the ```image();``` method. <br> (Example return value ```data:image/png;base64,iVBORw0KGgoAA...```) |
+| ```storeSession();``` | Use to store the generated values in the captcha session. This is use for validation in another request or page. |
+| ```getSession();``` | Use to get the current stored session generated values in the captcha session. This is use to validate the generated code against the user organic inputed code. <br> (Example return value ```array('code' => '...')```) |
+
+- The basic usage of the package:
+
+```php
+<?php
+
+include __DIR__  . '/vendor/autoload.php';
+
+use LordDashMe\SimpleCaptcha\Captcha;
+
+// Initialize the captcha class.
+$captcha = new Captcha();
+// Execute the random generation of code.
+$captcha->code();
+// Execute the image captcha rendering.
+$captcha->image();
+
+// The generated captcha code, something like "QwErTyx..."
+echo $captcha->getCode(); 
+// The generated captcha image that included the code above  
+// and the output is base64 data image "data:image/png;base64,iVBORw0KGgoAA..."
+echo $captcha->getImage(); 
+```
+
+- Basic usage can also be done by the implementation below:
+```php
+<?php
+
+include __DIR__  . '/vendor/autoload.php';
+
+use LordDashMe\SimpleCaptcha\Facade\Captcha;
+
+Captcha::init();
+Captcha::code();
+Captcha::image();
+
+echo Captcha::getCode();
+echo Captcha::getImage();
+```
+
+- The package also provided a simple way to validate the user input code, base on the captcha image:
+  
+    - For example we have a registration page file:
+    
+        - Initialize the Captcha class together with the code and image generation function.
+        
+        - Use the ```storeSession()``` to save the generated captcha details in the captcha own session.
+        
+        - The store session are essential later for validating the user input.
+    
+            ```php
+            <?php
+            
+            // registration-page.php
+
+            include __DIR__  . '/vendor/autoload.php';
+
+            use LordDashMe\SimpleCaptcha\Captcha;
+
+            $captcha = new Captcha();
+            $captcha->code();
+            $captcha->image();
+            $captcha->storeSession();
+            
+            ?>
+            
+            <form method="POST" action="/reg-validation-page.php">
+                Your other fields here...
+                <img src="<?php echo $captcha->getImage(); ?>">
+                <input type="text" name="user_captcha_code" value="">
+                <input type="submit" value="Register">
+            </form>
+            ```
+    - And the validation page file:
+  
+        - We need to initialize again the Captcha class but now we don't need to initialize the generation code.
+        
+        - Thus the generation code will only be use when we want to show a captcha image.
+        
+        - But in this scenario we want to validate the user inputed code only.
+    
+            ```php
+            <?php 
+            
+            // reg-validation-page.php
+            
+            include __DIR__  . '/vendor/autoload.php';
+
+            use LordDashMe\SimpleCaptcha\Captcha;
+
+            $captcha = new Captcha();
+            $data = $captcha->getSession(); // return(s) array( 'code' => 'QwErTyx...' )
+            
+            if ($_POST['user_captcha_code'] === $data['code']) {
+                return 'Code is valid!';
+            } else {
+                return 'Code is invalid!';
+            }
+            ```
+
+- To change the default configuration setup of the Captcha class you can override the below codes:
+
+```php
+<?php
+
+include __DIR__  . '/vendor/autoload.php';
+
+use LordDashMe\SimpleCaptcha\Captcha;
+use LordDashMe\SimpleCaptcha\Facade\Captcha;
+
+$config = array(
+    'session_name'       => 'ldm-simple-captcha',
+    'session_index_name' => 'LDM_SIMPLE_CAPTCHA',
+    'session_https'      => false,
+    'session_http_only'  => true,
+    'font_color'         => '#999',
+    'font_size_min'      => 28,
+    'font_size_max'      => 28,
+    'angle_min'          => 0,
+    'angle_max'          => 10,
+    'shadow'             => true,
+    'shadow_color'       => '#fff',
+    'shadow_offset_x'    => -3,
+    'shadow_offset_y'    => 1,
+    'backgrounds' => array(
+        '45-degree-fabric.png',
+        'cloth-alike.png',
+        'grey-sandbag.png',
+        'kinda-jean.png',
+        'polyester-lite.png',
+        'stitched-wool.png',
+        'white-carbon.png',
+        'white-wave.png'
+    ),
+    'fonts' => array(
+        'times_new_yorker.ttf'
+    )
+);
+
+$captcha = new Captcha($config);
+
+// Or in a static like class initialization.
+
+Captcha::init($config);
+``` 
+
+- Note in overriding the config of Captcha class.
+
+  1. The ```backgrounds``` and ```fonts``` are tightly coupled in the directory of the plugin.
+  
+  2. If you want to override the ```backgrounds``` and ```fonts``` you need to extends the Captcha class with your New class that overrides the protected methods of Captcha class for resources directory ```backgroundsDirectoryPath()``` and ```fontsDirectoryPath```.
+        
+        ```php
+        <?php
+
+        include __DIR__  . '/vendor/autoload.php';
+
+        use LordDashMe\SimpleCaptcha\Captcha;
+
+        class MyNewCaptcha extends Captcha
+        {
+            public function __construct($config = array())
+            {
+                parent::__construct($config);
+            }
+
+            protected function backgroundsDirectoryPath()
+            {
+                return 'path/to/your/custom/backgrounds/';
+            }
+
+            protected function fontsDirectoryPath()
+            {
+                return 'path/to/your/custom/fonts/'; 
+            }
+        }
+        ```
 
 ## License
 
