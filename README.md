@@ -183,31 +183,31 @@ Captcha::init($config);
   1. The ```backgrounds``` and ```fonts``` are tightly coupled in the directory of the plugin.
   
   2. If you want to override the ```backgrounds``` and ```fonts``` you need to extends the Captcha class with your New class that overrides the protected methods of Captcha class for resources directory ```backgroundsDirectoryPath()``` and ```fontsDirectoryPath```.
-  ```php
-  <?php
+    ```php
+    <?php
 
-  include __DIR__  . '/vendor/autoload.php';
+    include __DIR__  . '/vendor/autoload.php';
 
-  use LordDashMe\SimpleCaptcha\Captcha;
+    use LordDashMe\SimpleCaptcha\Captcha;
 
-  class MyNewCaptcha extends Captcha
-  {
-      public function __construct($config = array())
-      {
-          parent::__construct($config);
-      }
+    class MyNewCaptcha extends Captcha
+    {
+        public function __construct($config = array())
+        {
+            parent::__construct($config);
+        }
 
-      protected function backgroundsDirectoryPath()
-      {
-          return 'path/to/your/custom/backgrounds/';
-      }
+        protected function backgroundsDirectoryPath()
+        {
+            return 'path/to/your/custom/backgrounds/';
+        }
 
-      protected function fontsDirectoryPath()
-      {
-          return 'path/to/your/custom/fonts/'; 
-      }
-  }
-  ```
+        protected function fontsDirectoryPath()
+        {
+            return 'path/to/your/custom/fonts/'; 
+        }
+    }
+    ```
 
 ## License
 
