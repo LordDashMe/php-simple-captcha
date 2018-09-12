@@ -619,7 +619,7 @@ class Captcha
      * The start session method, initialize the session for captcha instance.
      * The max session time is set to 15mins and the garbage collector can now truncate this
      * unused session. Some of the security setup are provided in the config property like
-     * https and http only, the other is depends now in the PHP ini setup.
+     * https and http only, the other depends on the PHP ini setup.
      * 
      * @return void
      */
