@@ -16,7 +16,7 @@ use LordDashMe\SimpleCaptcha\Utility\HexToRGB;
 /**
  * Captcha Class.
  * 
- * A php simple captcha implementation that suite to any type of system built on php.
+ * A simple captcha package that suite to any type of web application built on php.
  * 
  * @author Joshua Clifford Reyes <reyesjoshuaclifford@gmail.com>
  */
