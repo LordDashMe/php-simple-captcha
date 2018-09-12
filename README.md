@@ -57,7 +57,7 @@ echo $captcha->getCode();
 echo $captcha->getImage(); 
 ```
 
-- Basic usage can also be done by the implementation below:
+- Also can be done by the below implementation:
 
 ```php
 <?php
@@ -79,6 +79,8 @@ echo Captcha::getCode();
 // and the output is base64 data image "data:image/png;base64,iVBORw0KGgoAA..."
 echo Captcha::getImage();
 ```
+
+### Session Captcha Usage
 
 - The package also provided a simple way to validate the user input code.
   
@@ -143,6 +145,8 @@ echo Captcha::getImage();
         }
         ```
 
+### Captcha Configuration
+
 - To change the default configuration setup of the Captcha class you can override the below codes:
 
 ```php
@@ -189,7 +193,9 @@ $captcha = new Captcha($config);
 CaptchaFacade::init($config);
 ```
 
-- Note in overriding the config of Captcha class.
+### Note
+
+- In overriding the config of Captcha class.
 
   1. The ```backgrounds``` and ```fonts``` are tightly coupled in the directory of the plugin.
   
