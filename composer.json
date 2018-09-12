@@ -1,6 +1,6 @@
 {
     "name": "lorddashme/php-simple-captcha",
-    "description": "A php simple captcha implementation that suite to any type of system built on php.",
+    "description": "A simple captcha package that suite to any type of web application built on php.",
     "keywords": [
         "simple",
         "captcha",
