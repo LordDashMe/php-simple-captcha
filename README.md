@@ -66,11 +66,17 @@ include __DIR__  . '/vendor/autoload.php';
 
 use LordDashMe\SimpleCaptcha\Facade\Captcha;
 
+// Initialize the facade captcha class.
 Captcha::init();
+// Execute the random generation of code.
 Captcha::code();
+// Execute the image captcha rendering.
 Captcha::image();
 
+// The generated captcha code, something like "QwErTyx..."
 echo Captcha::getCode();
+// The generated captcha image that included the code above  
+// and the output is base64 data image "data:image/png;base64,iVBORw0KGgoAA..."
 echo Captcha::getImage();
 ```
 
