@@ -145,7 +145,7 @@ echo Captcha::getImage();
 include __DIR__  . '/vendor/autoload.php';
 
 use LordDashMe\SimpleCaptcha\Captcha;
-use LordDashMe\SimpleCaptcha\Facade\Captcha;
+use LordDashMe\SimpleCaptcha\Facade\Captcha as CaptchaFacade;
 
 $config = array(
     'session_name'       => 'ldm-simple-captcha',
@@ -180,7 +180,7 @@ $captcha = new Captcha($config);
 
 // Or in a static like class initialization.
 
-Captcha::init($config);
+CaptchaFacade::init($config);
 ```
 
 - Note in overriding the config of Captcha class.
