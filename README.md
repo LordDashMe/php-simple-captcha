@@ -74,7 +74,7 @@ echo Captcha::getCode();
 echo Captcha::getImage();
 ```
 
-- The package also provided a simple way to validate the user input code, base on the captcha image:
+- The package also provided a simple way to validate the user input code.
   
   - For example we have a registration page file:
 
