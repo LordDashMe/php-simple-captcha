@@ -145,7 +145,7 @@ echo Captcha::getImage();
         }
         ```
 
-### Captcha Configuration
+### Captcha Class Configuration
 
 - To change the default configuration setup of the Captcha class you can override the below codes:
 
