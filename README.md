@@ -57,7 +57,7 @@ echo $captcha->getCode();
 echo $captcha->getImage(); 
 ```
 
-- Also can be done by the below implementation:
+- Also can be done by the implementation below:
 
 ```php
 <?php
@@ -147,7 +147,7 @@ echo Captcha::getImage();
 
 ### Captcha Class Configuration
 
-- To change the default configuration setup of the Captcha class you can override the below codes:
+- To change the default configuration setup of the Captcha class:
 
 ```php
 <?php
