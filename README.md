@@ -199,7 +199,7 @@ CaptchaFacade::init($config);
 
   1. The ```backgrounds``` and ```fonts``` are tightly coupled in the directory of the package.
   
-  2. If you want to override the ```backgrounds``` and ```fonts``` you need to extends the Captcha class with your New class that overrides the protected methods of Captcha class for resources directory ```backgroundsDirectoryPath()``` and ```fontsDirectoryPath```.
+  2. If you want to override the ```backgrounds``` and ```fonts``` you need to extends the Captcha class with your new class that overrides the protected methods of Captcha class for resources directory ```backgroundsDirectoryPath()``` and ```fontsDirectoryPath```.
 
     ```php
     <?php
