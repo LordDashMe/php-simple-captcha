@@ -86,7 +86,7 @@ echo Captcha::getImage();
   
   - For example we have a registration page file:
 
-    - Initialize the Captcha class together with the code and image generation function.
+    - Initialize the Captcha class together with the code and image generation process.
 
     - Use the ```storeSession()``` to save the generated captcha details in the captcha own session.
 
