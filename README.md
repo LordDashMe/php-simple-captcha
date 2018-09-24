@@ -6,7 +6,7 @@ A simple captcha package that suite to any type of web application built on php.
 
 ## Sample
 
-![PHP Simple Captcha](resources/img/simple-captcha-sample.png) ![PHP Simple Captcha 1](resources/img/simple-captcha-sample-1.png) ![PHP Simple Captcha 2](resources/img/simple-captcha-sample-2.png) ![PHP Simple Captcha 3](resources/img/simple-captcha-sample-3.png)
+![PHP Simple Captcha](resources/img/simple-captcha-sample.png) ![PHP Simple Captcha 1](resources/img/simple-captcha-sample-1.png) ![PHP Simple Captcha 2](resources/img/simple-captcha-sample-2.png)
 
 ## Requirement(s)
 
