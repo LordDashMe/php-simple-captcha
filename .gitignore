@@ -1,5 +1,2 @@
-# Composer
 vendor/
-
-# PHPUnit Test Coverage
 build/
