@@ -44,18 +44,14 @@ class HexToRGB
         $rgb = array();
 
         if (\strlen($hexString) === 6) {
-
             $color = \hexdec($hexString);
             $rgb['r'] = 0xFF & ($color >> 0x10);
             $rgb['g'] = 0xFF & ($color >> 0x8);
             $rgb['b'] = 0xFF & $color;
-
         } else if (\strlen($hexString) === 3) {
-
             $rgb['r'] = \hexdec(\str_repeat(\substr($hexString, 0, 1), 2));
             $rgb['g'] = \hexdec(\str_repeat(\substr($hexString, 1, 1), 2));
             $rgb['b'] = \hexdec(\str_repeat(\substr($hexString, 2, 1), 2));
-
         } else {
             throw HexToRGBException::isInvalidStringLength();
         }

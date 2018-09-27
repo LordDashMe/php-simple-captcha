@@ -478,22 +478,23 @@ class Captcha
      */
     protected function drawShadow($imageCanvas, $textAngle, $font, $fontSize, $textPosition, $code)
     {
-        if ($this->config['shadow']) {
-            
-            $shadowColor = $this->convertHexToRGB($this->config['shadow_color']);
-            
-            $shadowColor = \imagecolorallocate(
-                $imageCanvas, 
-                $shadowColor['r'], $shadowColor['g'], $shadowColor['b']
-            );
-            
-            \imagettftext(
-                $imageCanvas, $fontSize, $textAngle, 
-                $textPosition['text_position_x'] + $this->config['shadow_offset_x'], 
-                $textPosition['text_position_y'] + $this->config['shadow_offset_y'], 
-                $shadowColor, $font, $code
-            );
+        if (! $this->config['shadow']) {
+            return $imageCanvas;   
         }
+
+        $shadowColor = $this->convertHexToRGB($this->config['shadow_color']);
+            
+        $shadowColor = \imagecolorallocate(
+            $imageCanvas, 
+            $shadowColor['r'], $shadowColor['g'], $shadowColor['b']
+        );
+        
+        \imagettftext(
+            $imageCanvas, $fontSize, $textAngle, 
+            $textPosition['text_position_x'] + $this->config['shadow_offset_x'], 
+            $textPosition['text_position_y'] + $this->config['shadow_offset_y'], 
+            $shadowColor, $font, $code
+        );
 
         return $imageCanvas;
     }

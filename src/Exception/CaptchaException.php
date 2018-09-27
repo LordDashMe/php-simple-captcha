@@ -18,4 +18,4 @@ use Exception;
  * 
  * @author Joshua Clifford Reyes <reyesjoshuaclifford@gmail.com>
  */
-class Captcha extends Exception {}
+class CaptchaException extends Exception {}

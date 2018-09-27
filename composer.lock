@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "87710cd84530b42205efabbbef54440f",
+    "content-hash": "ccb24b7fad13f0aed80fa53d545b7d4e",
     "packages": [
         {
             "name": "lorddashme/php-static-class-interface",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/LordDashMe/php-static-class-interface.git",
-                "reference": "616a04c3035e2d8bdaeae43c60812368a8323647"
+                "reference": "2310db22da2351bd6e85294b0c7990b9af86acee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/LordDashMe/php-static-class-interface/zipball/616a04c3035e2d8bdaeae43c60812368a8323647",
-                "reference": "616a04c3035e2d8bdaeae43c60812368a8323647",
+                "url": "https://api.github.com/repos/LordDashMe/php-static-class-interface/zipball/2310db22da2351bd6e85294b0c7990b9af86acee",
+                "reference": "2310db22da2351bd6e85294b0c7990b9af86acee",
                 "shasum": ""
             },
             "require": {
@@ -53,7 +53,7 @@
                 "static",
                 "static-interface"
             ],
-            "time": "2018-08-17T11:55:45+00:00"
+            "time": "2018-09-27T09:01:23+00:00"
         }
     ],
     "packages-dev": [

@@ -2,7 +2,6 @@
 
 namespace LordDashMe\SimpleCaptcha\Tests\Unit\Facade;
 
-use Mockery as Mockery;
 use PHPUnit\Framework\TestCase;
 use LordDashMe\SimpleCaptcha\Facade\Captcha;
 

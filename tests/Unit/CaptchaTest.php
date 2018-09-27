@@ -42,6 +42,18 @@ class CaptchaTest extends TestCase
     /**
      * @test
      */
+    public function it_should_generate_captcha_image_without_shadow_base_on_the_generated_code()
+    {
+        $captcha = new Captcha(array('shadow' => false));
+        $captcha->code(5);
+        $captcha->image();
+
+        $this->assertNotEmpty($captcha->getImage());    
+    }
+
+    /**
+     * @test
+     */
     public function it_should_generate_captcha_image_base_on_the_generated_code_with_config_restriction()
     {
         $captcha = new Captcha(array(

@@ -11,7 +11,7 @@
 
 namespace LordDashMe\SimpleCaptcha\Exception\Utility;
 
-use LordDashMe\SimpleCaptcha\Exception\Captcha as CaptchaException;
+use LordDashMe\SimpleCaptcha\Exception\CaptchaException;
 
 /**
  * Hex To RGB Exception Class.
@@ -20,18 +20,22 @@ use LordDashMe\SimpleCaptcha\Exception\Captcha as CaptchaException;
  */
 class HexToRGB extends CaptchaException
 {
-    const ERROR_CODE_UNRESOLVED_STRING_TYPE = 100;
-    const ERROR_CODE_UNRESOLVED_STRING_LENGTH = 101;
+    const IS_INVALID_STRING_TYPE = 1;
+    const IS_INVALID_STRING_LENGTH = 2;
 
-    public static function isInvalidStringType($message = '', $code = null, $previous = null)
-    {
-        $message = 'The string type is invalid.';
-        return new static($message, self::ERROR_CODE_UNRESOLVED_STRING_TYPE, $previous);
+    public static function isInvalidStringType(
+        $message = 'The string type is invalid.', 
+        $code = self::IS_INVALID_STRING_TYPE, 
+        $previous = null
+    ) {
+        return new static($message, $code, $previous);
     }
 
-    public static function isInvalidStringLength($message = '', $code = null, $previous = null)
-    {
-        $message = 'The string length is invalid.';
-        return new static($message, self::ERROR_CODE_UNRESOLVED_STRING_LENGTH, $previous);
+    public static function isInvalidStringLength(
+        $message = 'The string length is invalid.', 
+        $code = self::IS_INVALID_STRING_LENGTH, 
+        $previous = null
+    ) {
+        return new static($message, $code, $previous);
     }
 }

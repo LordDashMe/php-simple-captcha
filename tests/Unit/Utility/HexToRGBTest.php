@@ -2,7 +2,6 @@
 
 namespace LordDashMe\SimpleCaptcha\Tests\Unit\Utility;
 
-use Mockery as Mockery;
 use PHPUnit\Framework\TestCase;
 use LordDashMe\SimpleCaptcha\Utility\HexToRGB;
 
@@ -18,21 +17,25 @@ class HexToRGBTest extends TestCase
 
     /**
      * @test
-     * @expectedException LordDashMe\SimpleCaptcha\Exception\Utility\HexToRGB
-     * @expectedExceptionCode 100
      */
     public function it_should_throw_invalid_string_type_when_given_hex_is_not_string()
     {
+        $this->expectException(\LordDashMe\SimpleCaptcha\Exception\Utility\HexToRGB::class);
+        $this->expectExceptionCode(1);
+        $this->expectExceptionMessage('The string type is invalid.');
+
         HexToRGB::convert(null);
     }
 
     /**
      * @test
-     * @expectedException LordDashMe\SimpleCaptcha\Exception\Utility\HexToRGB
-     * @expectedExceptionCode 101 
      */
     public function it_should_throw_invalid_string_length_when_given_hex_is_not_valid_length()
     {
+        $this->expectException(\LordDashMe\SimpleCaptcha\Exception\Utility\HexToRGB::class);
+        $this->expectExceptionCode(2);
+        $this->expectExceptionMessage('The string length is invalid.');
+
         HexToRGB::convert('null');
     }
 
