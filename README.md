@@ -146,7 +146,7 @@ echo Captcha::getImage();
         }
         ```
 
-    - There is a [Sample Diretory](sample) in the root directory of the package that will nearly show you the actual implementation, go check it out.
+    - There is a [sample](sample) in the root directory of the package that will nearly show you the actual implementation, go check it out.
 
 ### Captcha Class Configuration
 
