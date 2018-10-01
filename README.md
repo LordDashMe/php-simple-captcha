@@ -6,7 +6,7 @@ A simple captcha package that suite to any type of web application built on php.
 
 ## Sample
 
-![PHP Simple Captcha 1](resources/img/simple-captcha-sample-1.png) ![PHP Simple Captcha 2](resources/img/simple-captcha-sample-2.png) ![PHP Simple Captcha 3](resources/img/simple-captcha-sample-3.png) ![PHP Simple Captcha 4](resources/img/simple-captcha-sample-4.png)
+![PHP Simple Captcha Sample 1](resources/img/sample1.png) ![PHP Simple Captcha Sample 2](resources/img/sample2.png) ![PHP Simple Captcha Sample 3](resources/img/sample3.png) ![PHP Simple Captcha Sample 4](resources/img/sample4.png)
 
 ## Requirement(s)
 
@@ -51,10 +51,10 @@ $captcha->code();
 $captcha->image();
 
 // The generated captcha code, something like "QwErTyx..."
-echo $captcha->getCode(); 
+echo $captcha->getCode();
 // The generated captcha image that included the code above  
 // and the output is base64 data image "data:image/png;base64,iVBORw0KGgoAA..."
-echo $captcha->getImage(); 
+echo $captcha->getImage();
 ```
 
 - Also can be done by the implementation below:
@@ -84,7 +84,7 @@ echo Captcha::getImage();
 
 - The package also provided a simple way to validate the user input code.
   
-  - For example we have a registration page file:
+  - For example we have a login page:
 
     - Initialize the Captcha class together with the code and image generation process.
 
@@ -95,7 +95,7 @@ echo Captcha::getImage();
         ```php
         <?php
 
-        // registration-page.php
+        // login.php
 
         include __DIR__  . '/vendor/autoload.php';
 
@@ -108,18 +108,18 @@ echo Captcha::getImage();
 
         ?>
 
-        <form method="POST" action="/reg-validation-page.php">
+        <form action="validate-login.php" method="POST">
 
             ...
 
             <img src="<?php echo $captcha->getImage(); ?>">
             <input type="text" name="user_captcha_code" value="">
-            
-            <input type="submit" value="Register">
+
+            <input type="submit" value="Login">
 
         </form>
         ```
-  - And the validation page file:
+  - And the validation route:
 
     - We need to initialize again the Captcha class but now we don't need to initialize the code and image generation.
 
@@ -130,7 +130,7 @@ echo Captcha::getImage();
         ```php
         <?php
 
-        // reg-validation-page.php
+        // validate-login.php
 
         include __DIR__  . '/vendor/autoload.php';
 
@@ -145,6 +145,8 @@ echo Captcha::getImage();
             return 'Code is invalid!';
         }
         ```
+
+    - There is a [Sample Diretory](sample) in the root directory of the package that will nearly show you the actual implementation, go check it out.
 
 ### Captcha Class Configuration
 

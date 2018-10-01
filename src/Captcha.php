@@ -34,27 +34,27 @@ class Captcha
         'session_index_name' => 'LDM_SIMPLE_CAPTCHA',
         'session_https'      => false,
         'session_http_only'  => true,
-        'font_color'         => '#999',
-        'font_size_min'      => 28,
+        'font_color'         => '#000',
+        'font_size_min'      => 26,
         'font_size_max'      => 28,
         'angle_min'          => 0,
-        'angle_max'          => 10,
+        'angle_max'          => 9,
         'shadow'             => true,
         'shadow_color'       => '#fff',
         'shadow_offset_x'    => -3,
         'shadow_offset_y'    => 1,
         'backgrounds' => array(
-            '45-degree-fabric.png',
-            'cloth-alike.png',
-            'grey-sandbag.png',
-            'kinda-jean.png',
-            'polyester-lite.png',
-            'stitched-wool.png',
-            'white-carbon.png',
-            'white-wave.png'
+            'bg1.png',
+            'bg2.png',
+            'bg3.png',
+            'bg4.png',
+            'bg5.png',
+            'bg6.png',
+            'bg7.png',
+            'bg8.png'
         ),
         'fonts' => array(
-            'times_new_yorker.ttf'
+            'capsmall_clean.ttf'
         )
     );
 
@@ -278,16 +278,21 @@ class Captcha
         $font           = $this->fonts();
         $fontSize       = $this->fontSize();
         $textBoxSize    = $this->textBoxSize($textAngle, $font, $fontSize, $this->getCode());
-        $textPosition   = $this->textPosition($textBoxSize, $backgroundSize);
+        $textPosition   = $this->textPosition($textBoxSize, $backgroundSize);  
 
         // Generating the actual text content and combining with the created
         // canvas base on the selected background image. This is the heavy part
         // of the code image processing.
         $imageCanvas = $this->drawShadow(
             $imageCanvas, $textAngle, $font, $fontSize, $textPosition, $this->getCode()
-        );
+        );      
+
         $imageCanvas = $this->drawText(
             $imageCanvas, $textAngle, $font, $fontSize, $textPosition, $fontColor, $this->getCode()
+        );
+
+        $imageCanvas = $this->drawTextCrossLine(
+            $imageCanvas, $backgroundSize, $textAngle, $textPosition
         );
         
         // Output the generated image using output buffer of PHP and
@@ -455,6 +460,13 @@ class Captcha
         }
 
         $textPositionY = \mt_rand($textPositionYMin, $textPositionYMax);
+
+        if ($textPositionX < 30 && $textPositionY < 40) {
+            return array(
+                'text_position_x' => 30,
+                'text_position_y' => 45
+            );
+        }
         
         return array(
             'text_position_x' => $textPositionX,
@@ -522,6 +534,31 @@ class Captcha
             $textPosition['text_position_y'], 
             $fontColor, $font, $code
         );
+
+        return $imageCanvas;
+    }
+
+    /**
+     * The draw process for the text cross line. This process will add more complexity
+     * for the reading automation of the generated image captcha.
+     * 
+     * The process of adding more challenge to any automation attempt in the captcha image.
+     * 
+     * @param  mixed  $imageCanvas
+     * @param  array  $backgroundSize
+     * @param  array  $textPosition
+     * 
+     * @return $imageCanvas
+     */
+    protected function drawTextCrossLine($imageCanvas, $backgroundSize, $textAngle, $textPosition)
+    {
+        $text_position_y = $textPosition['text_position_y'];
+
+        $lineAngle = $textAngle > 0 ? (($text_position_y) - $textAngle * 5) : (($text_position_y));
+
+        $black = imagecolorallocate($imageCanvas, 20, 20, 20);
+        imagesetthickness($imageCanvas, 4);
+        imageline($imageCanvas, 10, $text_position_y - 14, $backgroundSize['bg_width'] - 10, $lineAngle, $black);
 
         return $imageCanvas;
     }
@@ -603,8 +640,10 @@ class Captcha
     public function getSession()
     {
         if (! isset($_COOKIE[$this->config['session_name']])) {
-            $this->startSession();
+            return false;
         }
+
+        $this->startSession();
 
         $data = $this->collectSessionData();
         

@@ -136,6 +136,84 @@ class CaptchaTest extends TestCase
     /**
      * @test
      */
+    public function it_should_generate_captcha_image_and_with_mocked_textbox_size_when_text_position_x_and_y_are_minimum_value()
+    {
+        $captcha = Mockery::mock('LordDashMe\SimpleCaptcha\Captcha[textBoxSize]')
+            ->shouldAllowMockingProtectedMethods();
+        $captcha->shouldReceive('textBoxSize')
+            ->andReturn(array(
+                0 => -1,
+                1 => 1,
+                2 => 120,
+                3 => 1,
+                4 => 120,
+                5 => -27,
+                6 => -1,
+                7 => -27
+            ));
+        $captcha->code(5);
+        $captcha->image();
+
+        $this->assertNotEmpty($captcha->getImage());
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_generate_captcha_image_and_with_mocked_textbox_size_when_text_position_x_and_y_are_not_minimum_value()
+    {
+        $captcha = Mockery::mock('LordDashMe\SimpleCaptcha\Captcha[textBoxSize]')
+            ->shouldAllowMockingProtectedMethods();
+        $captcha->shouldReceive('textBoxSize')
+            ->andReturn(array(
+                0 => -1,
+                1 => 9,
+                2 => 100,
+                3 => 5,
+                4 => 99,
+                5 => -30,
+                6 => -2,
+                7 => -27
+            ));
+        $captcha->code(5);
+        $captcha->image();
+
+        $this->assertNotEmpty($captcha->getImage());
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_generate_captcha_image_and_with_mocked_text_angle_when_text_angle_is_negative_value()
+    {
+        $captcha = Mockery::mock('LordDashMe\SimpleCaptcha\Captcha[textAngle]')
+            ->shouldAllowMockingProtectedMethods();
+        $captcha->shouldReceive('textAngle')
+            ->andReturn(-5);
+        $captcha->code(5);
+        $captcha->image();
+
+        $this->assertNotEmpty($captcha->getImage());
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_generate_captcha_image_and_with_mocked_text_angle_when_text_angle_is_positive_value()
+    {
+        $captcha = Mockery::mock('LordDashMe\SimpleCaptcha\Captcha[textAngle]')
+            ->shouldAllowMockingProtectedMethods();
+        $captcha->shouldReceive('textAngle')
+            ->andReturn(5);
+        $captcha->code(5);
+        $captcha->image();
+
+        $this->assertNotEmpty($captcha->getImage());
+    }
+
+    /**
+     * @test
+     */
     public function it_should_store_the_code_in_flash_session()
     {
         $captcha = new Captcha();
@@ -152,8 +230,23 @@ class CaptchaTest extends TestCase
      * @test
      * @depends it_should_store_the_code_in_flash_session
      */
+    public function it_should_return_false_in_get_session_when_session_cookie_is_not_set()
+    {
+        $captcha = new Captcha();
+
+        $captchaStoredData = $captcha->getSession();
+
+        $this->assertTrue(! $captchaStoredData);
+    }
+
+    /**
+     * @test
+     * @depends it_should_store_the_code_in_flash_session
+     */
     public function it_should_get_the_code_in_flash_session()
     {
+        $_COOKIE['ldm-simple-captcha'] = 'mocked session cookie.';
+
         $captcha = new Captcha();
 
         $captchaStoredData = $captcha->getSession();
