@@ -125,7 +125,7 @@ echo Captcha::getImage();
 
     - The generation will only be use when we want to show a new captcha image and code.
 
-    - But in this scenario we want only to validate the user input captcha code.
+    - In this scenario we want only to validate the user input captcha code.
 
         ```php
         <?php
