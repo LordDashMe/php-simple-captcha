@@ -165,27 +165,27 @@ $config = array(
     'session_index_name' => 'LDM_SIMPLE_CAPTCHA',
     'session_https'      => false,
     'session_http_only'  => true,
-    'font_color'         => '#999',
-    'font_size_min'      => 28,
+    'font_color'         => '#000',
+    'font_size_min'      => 26,
     'font_size_max'      => 28,
     'angle_min'          => 0,
-    'angle_max'          => 10,
+    'angle_max'          => 9,
     'shadow'             => true,
     'shadow_color'       => '#fff',
     'shadow_offset_x'    => -3,
     'shadow_offset_y'    => 1,
     'backgrounds' => array(
-        '45-degree-fabric.png',
-        'cloth-alike.png',
-        'grey-sandbag.png',
-        'kinda-jean.png',
-        'polyester-lite.png',
-        'stitched-wool.png',
-        'white-carbon.png',
-        'white-wave.png'
+        'bg1.png',
+        'bg2.png',
+        'bg3.png',
+        'bg4.png',
+        'bg5.png',
+        'bg6.png',
+        'bg7.png',
+        'bg8.png'
     ),
     'fonts' => array(
-        'times_new_yorker.ttf'
+        'capsmall_clean.ttf'
     )
 );
 
