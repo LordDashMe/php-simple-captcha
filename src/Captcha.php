@@ -556,9 +556,9 @@ class Captcha
 
         $lineAngle = $textAngle > 0 ? (($text_position_y) - $textAngle * 5) : (($text_position_y));
 
-        $black = imagecolorallocate($imageCanvas, 20, 20, 20);
-        imagesetthickness($imageCanvas, 4);
-        imageline($imageCanvas, 10, $text_position_y - 14, $backgroundSize['bg_width'] - 10, $lineAngle, $black);
+        $black = \imagecolorallocate($imageCanvas, 20, 20, 20);
+        \imagesetthickness($imageCanvas, 4);
+        \imageline($imageCanvas, 10, $text_position_y - 14, $backgroundSize['bg_width'] - 10, $lineAngle, $black);
 
         return $imageCanvas;
     }
@@ -570,7 +570,7 @@ class Captcha
      */
     protected function backgroundsDirectoryPath()
     {
-        return dirname(__FILE__) . '/../resources/backgrounds/';
+        return \dirname(__FILE__) . '/../resources/backgrounds/';
     }
 
     /**
@@ -580,7 +580,7 @@ class Captcha
      */
     protected function fontsDirectoryPath()
     {
-        return dirname(__FILE__) . '/../resources/fonts/';
+        return \dirname(__FILE__) . '/../resources/fonts/';
     }
 
     /**
