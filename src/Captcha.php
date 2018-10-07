@@ -210,7 +210,7 @@ class Captcha
         
         $code = '';
         
-        for ($i = 0; $i < $length; $i++) {
+        for ($x = 0; $x < $length; $x++) {
             $number = \rand(0, $charactersLength);
             $jumbleNumber = \rand(0, $number);
             $code .= $characters[$jumbleNumber];
