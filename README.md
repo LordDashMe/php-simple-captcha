@@ -22,7 +22,7 @@ composer require lorddashme/php-simple-captcha
 
 ## Usage
 
-- Below are the available functions:
+- List of available functions:
 
 | Function | Description |
 | -------- | ----------- |
@@ -34,7 +34,7 @@ composer require lorddashme/php-simple-captcha
 | ```storeSession();``` | Use to store the generated values in the captcha session. This is use for validation in another request or page. |
 | ```getSession();``` | Use to get the current stored session generated values in the captcha session. This is use to validate the generated code against the user organic inputed code. <br> The example return value ```array('code' => '...')``` |
 
-- The basic usage of the package:
+- Basic usage:
 
 ```php
 <?php
