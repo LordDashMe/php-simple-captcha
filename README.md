@@ -92,33 +92,33 @@ echo Captcha::getImage();
 
     - The stored session is essential for validating the user input later on.
 
-        ```php
-        <?php
+    ```php
+    <?php
 
-        // login.php
+    // login.php
 
-        include __DIR__  . '/vendor/autoload.php';
+    include __DIR__  . '/vendor/autoload.php';
 
-        use LordDashMe\SimpleCaptcha\Captcha;
+    use LordDashMe\SimpleCaptcha\Captcha;
 
-        $captcha = new Captcha();
-        $captcha->code();
-        $captcha->image();
-        $captcha->storeSession();
+    $captcha = new Captcha();
+    $captcha->code();
+    $captcha->image();
+    $captcha->storeSession();
 
-        ?>
+    ?>
 
-        <form action="validate-login.php" method="POST">
+    <form action="validate-login.php" method="POST">
 
-            ...
+      ...
 
-            <img src="<?php echo $captcha->getImage(); ?>">
-            <input type="text" name="user_captcha_code" value="">
+      <img src="<?php echo $captcha->getImage(); ?>">
+      <input type="text" name="user_captcha_code" value="">
 
-            <input type="submit" value="Login">
+      <input type="submit" value="Login">
 
-        </form>
-        ```
+    </form>
+    ```
   - And the validation route:
 
     - We need to initialize again the Captcha class but now we don't need to initialize the code and image generation.
