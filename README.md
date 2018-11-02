@@ -127,24 +127,24 @@ echo Captcha::getImage();
 
     - In this scenario we want only to validate the user input captcha code.
 
-        ```php
-        <?php
+    ```php
+    <?php
 
-        // validate-login.php
+    // validate-login.php
 
-        include __DIR__  . '/vendor/autoload.php';
+    include __DIR__  . '/vendor/autoload.php';
 
-        use LordDashMe\SimpleCaptcha\Captcha;
+    use LordDashMe\SimpleCaptcha\Captcha;
 
-        $captcha = new Captcha();
-        $data = $captcha->getSession(); // return(s) array( 'code' => 'QwErTyx...' )
+    $captcha = new Captcha();
+    $data = $captcha->getSession(); // return(s) array( 'code' => 'QwErTyx...' )
 
-        if ($_POST['user_captcha_code'] === $data['code']) {
-            return 'Code is valid!';
-        } else {
-            return 'Code is invalid!';
-        }
-        ```
+    if ($_POST['user_captcha_code'] === $data['code']) {
+        return 'Code is valid!';
+    } else {
+        return 'Code is invalid!';
+    }
+    ```
 
    - You may also check the [sample](sample) in the root directory of the package that will show you the actual implementation.
 
