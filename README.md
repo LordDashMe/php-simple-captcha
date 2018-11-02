@@ -146,11 +146,11 @@ echo Captcha::getImage();
         }
         ```
 
-   - You may also check the [sample](sample) in the root directory of the package that will show you the actual implementation of the Captcha class.
+   - You may also check the [sample](sample) in the root directory of the package that will show you the actual implementation.
 
-### Captcha Class Configuration
+### Captcha Configuration
 
-- To change the default configuration setup of the Captcha class:
+- To change the default config:
 
 ```php
 <?php
@@ -198,7 +198,7 @@ CaptchaFacade::init($config);
 
 ### Note
 
-- Overriding the default config of Captcha class.
+- Overriding the default config:
 
   - The ```backgrounds``` and ```fonts``` are tightly coupled in the directory of the package.
   
