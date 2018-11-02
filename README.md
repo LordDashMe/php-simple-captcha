@@ -14,7 +14,7 @@ A simple captcha package that suite to any type of web application built on php.
 
 ## Install
 
-- It is advice to install the package via Composer. Use the command below to install the package:
+- Recommended to install using Composer. Use the command below to install the package:
 
 ```txt
 composer require lorddashme/php-simple-captcha
@@ -57,7 +57,7 @@ echo $captcha->getCode();
 echo $captcha->getImage();
 ```
 
-- Also can be done by the implementation below:
+- Also can be done by using the code below:
 
 ```php
 <?php
