@@ -52,8 +52,8 @@ $captcha->image();
 
 // The generated captcha code, something like "QwErTyx..."
 echo $captcha->getCode();
-// The generated captcha image that included the code above  
-// and the output is base64 data image "data:image/png;base64,iVBORw0KGgoAA..."
+// The generated captcha image that include the code above. 
+// The output is base64 data image "data:image/png;base64,iVBORw0KGgoAA..."
 echo $captcha->getImage();
 ```
 
@@ -75,8 +75,8 @@ Captcha::image();
 
 // The generated captcha code, something like "QwErTyx..."
 echo Captcha::getCode();
-// The generated captcha image that included the code above  
-// and the output is base64 data image "data:image/png;base64,iVBORw0KGgoAA..."
+// The generated captcha image that include the code above.  
+// The output is base64 data image "data:image/png;base64,iVBORw0KGgoAA..."
 echo Captcha::getImage();
 ```
 
