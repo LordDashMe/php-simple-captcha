@@ -135,7 +135,7 @@ echo Captcha::getImage();
     use LordDashMe\SimpleCaptcha\Captcha;
 
     $captcha = new Captcha();
-    $data = $captcha->getSession(); // return(s) array( 'code' => 'QwErTyx...' )
+    $data = $captcha->getSession(); // return array( 'code' => 'QwErTyx...' )
 
     if ($_POST['user_captcha_code'] === $data['code']) {
         return 'Code is valid!';
