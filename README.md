@@ -189,7 +189,7 @@ $config = array(
 
 $captcha = new Captcha($config);
 
-// Or in a static like class initialization.
+// Or you can use this style.
 
 CaptchaFacade::init($config);
 ```
