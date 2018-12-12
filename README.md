@@ -84,13 +84,13 @@ echo Captcha::getImage();
 
 - The package also provided a simple way to validate the user input code.
   
-  - For example we have a login page:
+  - For example we have a Login Page:
 
     - Initialize the Captcha class together with the code and image generation process.
 
-    - Use the ```storeSession()``` to save the generated details in the captcha session.
+    - Use the ```storeSession()``` to store the generated details in the captcha session.
 
-    - The stored session is essential for validating the user input later on.
+    - The stored session details are essential for validating the user input later on.
 
     ```php
     <?php
@@ -119,13 +119,11 @@ echo Captcha::getImage();
 
     </form>
     ```
-  - And the validation route:
+  - The Validation Route:
 
     - We need to initialize again the Captcha class but now we don't need to initialize the code and image generation.
 
-    - The generation will only be use when we want to show a new captcha image and code.
-
-    - In this scenario we want only to validate the user input captcha code.
+    - Validate the user inputed captcha code.
 
     ```php
     <?php
@@ -146,7 +144,7 @@ echo Captcha::getImage();
     }
     ```
 
-   - You may also check the [sample](sample) in the root directory of the package that will show you the actual implementation.
+   - You may also check the [sample](sample) in the root directory of the package that will show you the actual example of implementing captcha class.
 
 ### Captcha Configuration
 
