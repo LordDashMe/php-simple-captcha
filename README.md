@@ -22,7 +22,7 @@ composer require lorddashme/php-simple-captcha
 
 ## Usage
 
-- List of available functions:
+### List of Available Functions
 
 | Function | Description |
 | -------- | ----------- |
