@@ -82,9 +82,9 @@ echo Captcha::getImage();
 
 ### Session Captcha Usage
 
-- The package also provided a simple way to validate the user input code.
+- The package also provided a simple way to validate the user input code, for example we have a login feature.
   
-  - For example we have a Login Page:
+  - Login Page:
 
     - Initialize the Captcha class together with the code and image generation process.
 
@@ -119,7 +119,7 @@ echo Captcha::getImage();
 
     </form>
     ```
-  - The Validation Route:
+  - Validation Route:
 
     - We need to initialize again the Captcha class but now we don't need to initialize the code and image generation.
 
@@ -144,11 +144,11 @@ echo Captcha::getImage();
     }
     ```
 
-   - You may also check the [sample](sample) in the root directory of the package that will show you the actual example of implementing captcha class.
+  - You may also check the [sample](sample) in the root directory of the package that will show you the actual example of implementing captcha class.
 
 ### Captcha Configuration
 
-- To change the default config:
+- To change the default config of the class:
 
 ```php
 <?php
