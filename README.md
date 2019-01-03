@@ -80,7 +80,7 @@ echo Captcha::getCode();
 echo Captcha::getImage();
 ```
 
-### Session Captcha Usage
+### Captcha Session Usage
 
 - The package also provided a simple way to validate the user input code, for example we have a login feature.
   
