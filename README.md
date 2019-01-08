@@ -194,7 +194,7 @@ $captcha = new Captcha($config);
 CaptchaFacade::init($config);
 ```
 
-### Note
+### Tips
 
 - Overriding the default config:
 
